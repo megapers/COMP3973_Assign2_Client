@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { userService, authenticationService } from '@/_services';
 
 class KidsPage extends React.Component {
@@ -8,7 +7,6 @@ class KidsPage extends React.Component {
         this.state = {data: []};
         this.arr = [];
         this.user = authenticationService.currentUserValue;
-        console.log(this.user);
     }
 
     componentDidMount() {
@@ -24,23 +22,37 @@ class KidsPage extends React.Component {
     }
 
     renderTableData() {
-        console.log(this.arr);
         return this.state.data.map((kid, index) => {
            const {id, username, firstName, lastName, isNaughty } = kid //destructuring
            if(kid.id != this.user.id){
+            console.log("Before change: ", kid);
             return (
                <tr key={id}>
                   <td>{id}</td>
                   <td>{username}</td>
                   <td>{firstName}</td>
                   <td>{lastName}</td>
-                  <td>{isNaughty.toString()}</td>
+                  <td>
+                     <input
+                        name="isGoing"
+                        type="checkbox"
+                        defaultChecked={kid.isNaughty}
+                        //checked={!isNaughty}
+                        onChange={
+                           () =>{
+                              kid.isNaughty = !kid.isNaughty;
+                              userService.updateUser(kid);
+                        }
+                     }/>
+                  </td>
                </tr>
             )
            }
         });
      }
 
+
+     
      renderTableHeader() {
         if (!this.state.data === undefined || !this.state.data.length == 0){
         let header = Object.keys(this.state.data[0])
@@ -66,9 +78,10 @@ class KidsPage extends React.Component {
                      {this.renderTableData()}
                  </tbody>
               </table>
-           </div>
-        );
-    }
+         </div>
+      );
+   }
+    
 }
 
 export { KidsPage };

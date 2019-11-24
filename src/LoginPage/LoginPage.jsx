@@ -13,7 +13,6 @@ class LoginPage extends React.Component {
             this.props.history.push('/');
         }
     }
-
     render() {
         return (
             <div>
