@@ -50,8 +50,6 @@ class KidsPage extends React.Component {
            }
         });
      }
-
-
      
      renderTableHeader() {
         if (!this.state.data === undefined || !this.state.data.length == 0){

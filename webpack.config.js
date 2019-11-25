@@ -37,6 +37,7 @@ module.exports = {
         // global app config object
         config: JSON.stringify({
             apiUrl: 'https://comp3973assign2.azurewebsites.net'
+            //apiUrl: 'https://localhost:44313'
         })
     }
 }
