@@ -8,6 +8,7 @@ import { HomePage } from '@/HomePage';
 import { KidsPage } from '@/KidsPage';
 import { LoginPage } from '@/LoginPage';
 import { RegisterPage } from '@/RegisterPage';
+import { EditUserPage } from '@/EditUserPage';
 
 class App extends React.Component {
     constructor(props) {
@@ -50,6 +51,7 @@ class App extends React.Component {
                                         <PrivateRoute exact path="/Kids" component={KidsPage} />
                                         <Route path="/login" component={LoginPage} />
                                         <Route path="/register" component={RegisterPage} />
+                                        <Route path="/editUser" component={EditUserPage} />
                                     </div>
                                 </div>
                             </div>

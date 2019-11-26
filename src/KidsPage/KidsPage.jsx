@@ -1,5 +1,6 @@
 import React from 'react';
 import { userService, authenticationService } from '@/_services';
+import { Redirect } from 'react-router-dom';
 
 class KidsPage extends React.Component {
     constructor(props) {
@@ -25,19 +26,20 @@ class KidsPage extends React.Component {
         return this.state.data.map((kid, index) => {
            const {id, username, firstName, lastName, isNaughty } = kid //destructuring
            if(kid.id != this.user.id){
-            console.log("Before change: ", kid);
             return (
-               <tr key={id}>
+               <tr key={id} onClick={() => { this.props.history.push({
+                  pathname: '/editUser',
+                  //search: "?id="+id,
+                  state : id 
+               })}}>
                   <td>{id}</td>
                   <td>{username}</td>
                   <td>{firstName}</td>
                   <td>{lastName}</td>
                   <td>
                      <input
-                        name="isGoing"
                         type="checkbox"
                         defaultChecked={kid.isNaughty}
-                        //checked={!isNaughty}
                         onChange={
                            () =>{
                               kid.isNaughty = !kid.isNaughty;

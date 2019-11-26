@@ -43,22 +43,31 @@ class RegisterPage extends Component {
             />
            <br/>
            <TextField
-             hintText="Enter your Last Name"
-             floatingLabelText="Last Name"
-             onChange = {(event,newValue) => this.setState({LastName:newValue})}
+              id="standard-required"
+              required={true}
+              label="Required"
+              hintText="Enter your Last Name"
+              floatingLabelText="Last Name"
+              onChange = {(event,newValue) => this.setState({LastName:newValue})}
             />
            <br/>
            <TextField
-             hintText="Enter username"
-             floatingLabelText="Username"
-             onChange = {(event,newValue) => this.setState({Username:newValue})}
+              id="standard-required"
+              required={true}
+              label="Required"
+              hintText="Enter username"
+              floatingLabelText="Username"
+              onChange = {(event,newValue) => this.setState({Username:newValue})}
             />
            <br/>
            <TextField
-             type = "password"
-             hintText="Enter your Password"
-             floatingLabelText="Password"
-             onChange = {(event,newValue) => this.setState({Password:newValue})}
+              id="standard-required"
+              required={true}
+              label="Required"
+              type = "password"
+              hintText="Enter your Password"
+              floatingLabelText="Password"
+              onChange = {(event,newValue) => this.setState({Password:newValue})}
             />
            <br/>
            <TextField

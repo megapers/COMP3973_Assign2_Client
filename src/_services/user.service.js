@@ -3,7 +3,8 @@ import { authHeader, authHeaderPutPost, handleResponse } from '@/_helpers';
 
 export const userService = {
     getAll,
-    updateUser
+    updateUser,
+    getUserById
 };
 
 function getAll() {
@@ -19,4 +20,9 @@ function updateUser(user) {
     };
     return fetch(`${config.apiUrl}/api/Users/updateuser/` + user.id, requestOptions)
         .then(handleResponse);
+}
+
+function getUserById(id) {
+    const requestOptions = { method: 'GET', headers: authHeader() };
+    return fetch(`${config.apiUrl}/api/users/getuser/` + id, requestOptions).then(handleResponse);
 }
