@@ -4,6 +4,7 @@ import { authHeader, authHeaderPutPost, handleResponse } from '@/_helpers';
 export const userService = {
     getAll,
     updateUser,
+    updateNaughty,
     getUserById
 };
 
@@ -13,11 +14,25 @@ function getAll() {
 }
 
 function updateUser(user) {
+    
+    const requestOptions = {
+        method: 'PUT',
+        headers: authHeaderPutPost(),
+        body: JSON.stringify(user.data),
+    };
+    console.log(requestOptions);
+    return fetch(`${config.apiUrl}/api/Users/updateuser/` + user.data.id, requestOptions)
+        .then(handleResponse);
+}
+
+function updateNaughty(user) {
+    
     const requestOptions = {
         method: 'PUT',
         headers: authHeaderPutPost(),
         body: JSON.stringify(user),
     };
+    console.log(requestOptions);
     return fetch(`${config.apiUrl}/api/Users/updateuser/` + user.id, requestOptions)
         .then(handleResponse);
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { userService, authenticationService } from '@/_services';
-import { Redirect } from 'react-router-dom';
 
 class KidsPage extends React.Component {
     constructor(props) {
@@ -29,9 +28,8 @@ class KidsPage extends React.Component {
             return (
                <tr key={id} onClick={() => { this.props.history.push({
                   pathname: '/editUser',
-                  //search: "?id="+id,
                   state : id 
-               })}}>
+                  })}}>
                   <td>{id}</td>
                   <td>{username}</td>
                   <td>{firstName}</td>
@@ -43,9 +41,11 @@ class KidsPage extends React.Component {
                         onChange={
                            () =>{
                               kid.isNaughty = !kid.isNaughty;
-                              userService.updateUser(kid);
+                              userService.updateNaughty(kid);
                         }
-                     }/>
+                     }
+                        onClick={(e) => e.stopPropagation()}
+                     />
                   </td>
                </tr>
             )
@@ -81,7 +81,6 @@ class KidsPage extends React.Component {
          </div>
       );
    }
-    
 }
 
 export { KidsPage };

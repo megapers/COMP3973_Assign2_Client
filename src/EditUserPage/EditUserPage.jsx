@@ -3,7 +3,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { Checkbox } from 'material-ui';
-import {userService, authenticationService } from '@/_services';
+import {userService} from '@/_services';
+import MapContainer from "@/MapContainer";
 
 class EditUserPage extends React.Component {
   constructor(props){
@@ -32,9 +33,8 @@ class EditUserPage extends React.Component {
     // fetch data and update state
     let id = this.props.location.state;
     userService.getUserById(id)
-    .then(json => this.setState({ data: json }));
+    .then(json => this.setState({ data: json }))
     //.then(json => console.log(json));
-
  }
 
   render() {
@@ -46,7 +46,7 @@ class EditUserPage extends React.Component {
            <form onSubmit={this.handleSubmit}>
            <TextField
             id='name'
-            floatingLabelText="Enter your Last Name"
+            floatingLabelText="First Name"
             value={dt.firstName}
               onChange = {(event,newValue) => this.setState(prevState => ({
                 data: {                  
@@ -103,13 +103,14 @@ class EditUserPage extends React.Component {
             />
            <br/>
            <TextField
-             floatingLabelText='Birthday'
+             floatingLabelText= {'Birthday: '+ formatDate(dt.birthDate)}
              type = "date"
-             value={formatDate(dt.birthDate).toString()}
+             format = "mm/dd/yyyy"
+             value={dt.birthDate}
               onChange = {(event,newValue) => this.setState(prevState => ({
                 data: {                  
                     ...prevState.data,    
-                    birthDate: newValue         
+                    birthDate:newValue     
                       }
                     }
                   )
@@ -179,7 +180,7 @@ class EditUserPage extends React.Component {
               onChange = {(event,newValue) => this.setState(prevState => ({
                 data: {                  
                     ...prevState.data,    
-                    latitude: newValue         
+                    latitude: parseFloat(newValue)         
                       }
                     }
                   )
@@ -193,7 +194,7 @@ class EditUserPage extends React.Component {
               onChange = {(event,newValue) => this.setState(prevState => ({
                 data: {                  
                     ...prevState.data,    
-                    longitude: newValue         
+                    longitude: parseFloat(newValue)         
                       }
                     }
                   )
@@ -202,8 +203,9 @@ class EditUserPage extends React.Component {
             />
            <br/>
            <Checkbox
-            checked={dt.isNaughty}
-              onChange = {(event,newValue) => this.setState(prevState => ({
+              label="Is naughty?"
+              checked={dt.isNaughty}
+              onCheck = {(event,newValue) => this.setState(prevState => ({
                 data: {                  
                     ...prevState.data,    
                     isNaughty: newValue         
@@ -212,12 +214,10 @@ class EditUserPage extends React.Component {
                   )
                 )
               }
-            
           />
            <RaisedButton label="Submit" primary={true} style={style} 
             
             onClick={() => {
-                //authenticationService.register(this.state.first_name, this.state.last_name, this.state.username, this.state.password)
                 userService.updateUser(this.state)
                    .catch(function (error) {
                         alert(error);
@@ -227,6 +227,7 @@ class EditUserPage extends React.Component {
             </form>
           </div>
          </MuiThemeProvider>
+         <MapContainer lat = {dt.latitude} long = {dt.longitude}/>
       </div>
     );
   }
@@ -243,7 +244,7 @@ function formatDate(date) {
   if (day.length < 2) 
       day = '0' + day;
 
-  return [year, month, day].join('-');
+  return [ month, day, year].join('/');
 }
 
 const style = {

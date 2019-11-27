@@ -1,5 +1,6 @@
 import React from 'react';
-import { userService, authenticationService } from '@/_services';
+import { authenticationService } from '@/_services';
+import MapContainer from "@/MapContainer";
 
 class HomePage extends React.Component {
     constructor(props) {
@@ -26,11 +27,11 @@ class HomePage extends React.Component {
                 {/* <h3>Users from secure api end point:</h3>
                 {users &&
                     <ul>
-                        {users.map(user =>
-                            <li key={user.id}>{user.firstName} {user.lastName}</li>
+                    {users.map(user =>
+                        <li key={user.id}>{user.firstName} {user.lastName}</li>
                         )}
-                    </ul>
-                } */}
+                        </ul>
+                    } */}
             </div>
         );
     }
