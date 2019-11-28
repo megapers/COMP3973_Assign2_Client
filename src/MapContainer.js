@@ -7,20 +7,34 @@ const mapStyles = {
 };
 
 export class MapContainer extends Component {
-  
-  state = {
-    data: {},
+  constructor({passProp}){
+    super()
+    this.state = 
+    {
+    data: passProp,
     showingInfoWindow: false,  //Hides or the shows the infoWindow
     activeMarker: {},          //Shows the active marker upon click
     selectedPlace: {}          //Shows the infoWindow to the selected place upon a marker
-  };
+
+    }
+  }
+  // state = {
+  //   data: {},
+  //   showingInfoWindow: false,  //Hides or the shows the infoWindow
+  //   activeMarker: {},          //Shows the active marker upon click
+  //   selectedPlace: {}          //Shows the infoWindow to the selected place upon a marker
+  // };
   
   componentDidMount() {
     this.setState({data: this.props})
   }
   
+  componentWillReceiveProps({passProp}) {
+    this.setState({...this.state.data.passProp, passProp})
+  }
+
   render() {
-    const dt = this.state.data
+    const dt = this.state.data.passProp;
     if(!isEmpty(dt)){
       console.log(dt);
       return(this.renderMap())
@@ -39,8 +53,8 @@ export class MapContainer extends Component {
         zoom={14}
         style={mapStyles}
         initialCenter={{
-        lat: this.state.data.lat,
-        lng: this.state.data.long
+        lat: this.state.data.passProp.latitude,
+        lng: this.state.data.passProp.longitude
         }}>
           <Marker
           onClick={this.onMarkerClick}

@@ -1,6 +1,5 @@
 import React from 'react';
 import { authenticationService } from '@/_services';
-import MapContainer from "@/MapContainer";
 
 class HomePage extends React.Component {
     constructor(props) {

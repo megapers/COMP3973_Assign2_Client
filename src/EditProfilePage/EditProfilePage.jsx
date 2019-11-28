@@ -6,19 +6,20 @@ import TextField from 'material-ui/TextField';
 import { Checkbox } from 'material-ui';
 import {userService} from '@/_services';
 import MapContainer from "@/MapContainer";
+import { authenticationService } from '@/_services';
 
-class EditUserPage extends React.Component {
+class EditProfilePage extends React.Component {
   constructor(props){
     super(props);
-    
+    this.user = authenticationService.currentUserValue;
     this.state={//add id to pass to the update function
       data: {
         id: 0,
         birthDate: '',
         city: '',
         email: '',
+        password: '',
         firstName: '',
-        isNaughty: false,
         lastName: '',
         latitude: 0,
         longitude: 0,
@@ -32,7 +33,7 @@ class EditUserPage extends React.Component {
   }
 
   componentDidMount() {
-    this._loadUserData(this.props.location.state);
+    this._loadUserData(this.user.id);
  }
 
  _loadUserData(id) {
@@ -220,27 +221,14 @@ class EditUserPage extends React.Component {
                   }
                 />
               <br/>
-              <Checkbox
-                  label="Is naughty?"
-                  checked={dt.isNaughty}
-                  onCheck = {(event,newValue) => this.setState(prevState => ({
-                    data: {                  
-                        ...prevState.data,    
-                        isNaughty: newValue         
-                          }
-                        }
-                      )
-                    )
-                  }
-              />
               <RaisedButton label="Submit" primary={true} style={style} 
                 
                 onClick={() => {
-                    userService.updateUser(this.state)
+                    userService.updateProfile(this.state)
                       .catch(function (error) {
                             alert(error);
                           });
-                          alert("Kid with id " + this.state.data.id + " is updated!");
+                          alert(this.state.data.firstName + ", your profile is updated!");
                     }
                 }/>
                 </form>
@@ -272,4 +260,4 @@ function formatDate(date) {
 const style = {
   margin: 15,
 };
-export {EditUserPage};
+export {EditProfilePage};

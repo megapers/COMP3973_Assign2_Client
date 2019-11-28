@@ -8,7 +8,7 @@ import { HomePage } from '@/HomePage';
 import { KidsPage } from '@/KidsPage';
 import { LoginPage } from '@/LoginPage';
 import { RegisterPage } from '@/RegisterPage';
-import { EditUserPage } from '@/EditUserPage';
+import { EditProfilePage } from '@/EditProfilePage';
 
 class App extends React.Component {
     constructor(props) {
@@ -41,6 +41,9 @@ class App extends React.Component {
                                     <Link to="/Kids" className="nav-item nav-link">Kids</Link>
                                     <a onClick={this.logout} className="nav-item nav-link">Logout</a>
                                 </div>
+                                <div className="navbar-nav ml-auto">
+                                    <Link to="/editProfile" className="nav-item nav-link">{"Ho-Ho-Ho, " + currentUser.firstName + " " + currentUser.lastName}</Link>
+                                </div>
                             </nav>
                         }
                         <div className="jumbotron">
@@ -51,7 +54,7 @@ class App extends React.Component {
                                         <PrivateRoute exact path="/Kids" component={KidsPage} />
                                         <Route path="/login" component={LoginPage} />
                                         <Route path="/register" component={RegisterPage} />
-                                        <Route path="/editUser" component={EditUserPage} />
+                                        <Route path="/editProfile" component={EditProfilePage} />
                                     </div>
                                 </div>
                             </div>
@@ -70,6 +73,9 @@ class App extends React.Component {
                                     <Link to="/" className="nav-item nav-link">Home</Link>
                                     <a onClick={this.logout} className="nav-item nav-link">Logout</a>
                                 </div>
+                                <div className="navbar-nav ml-auto">
+                                    <Link to="/editProfile" className="nav-item nav-link">{"Ho-Ho-Ho, " + currentUser.firstName + " " + currentUser.lastName}</Link>
+                                </div>
                             </nav>
                         }
                         <div className="jumbotron">
@@ -79,6 +85,7 @@ class App extends React.Component {
                                         <PrivateRoute exact path="/" component={HomePage} />
                                         <Route path="/login" component={LoginPage} />
                                         <Route path="/register" component={RegisterPage} />
+                                        <Route path="/editProfile" component={EditProfilePage} />
                                     </div>
                                 </div>
                             </div>
