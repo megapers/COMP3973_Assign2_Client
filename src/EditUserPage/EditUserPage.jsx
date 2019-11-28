@@ -45,7 +45,7 @@ class EditUserPage extends React.Component {
     const dt = this.state.data;
     
     if(dt.id != 0){
-
+      console.log(dt);
       return (
         this.rendetData(dt)
       )
