@@ -111,13 +111,13 @@ class RegisterPage extends Component {
            <TextField
              hintText="Enter your latitude"
              floatingLabelText="Latitude"
-             onChange = {(event,newValue) => this.setState({Latitude:newValue})}
+             onChange = {(event,newValue) => this.setState({Latitude:parseFloat(newValue)})}
             />
            <br/>
            <TextField
              hintText="Enter your longitude"
              floatingLabelText="Longitude"
-             onChange = {(event,newValue) => this.setState({Longitude:newValue})}
+             onChange = {(event,newValue) => this.setState({Longitude:parseFloat(newValue)})}
             />
            <br/>
            <RaisedButton label="Submit" primary={true} style={style} 
